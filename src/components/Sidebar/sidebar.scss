@@ -1,0 +1,182 @@
+.sidebar {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  height: 85vh;
+  padding: 40px;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  background-color: black;
+
+  transition: 0.3s ease-in;
+
+  &__top {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 1rem;
+
+    font-size: 1.5rem;
+
+    .logo {
+      width: 50px;
+      height: 50px;
+
+      animation: onsetTop 1s linear forwards;
+    }
+    .logo-label {
+      font-weight: 600;
+
+      animation: onsetTop 1s linear forwards;
+    }
+
+    button {
+      position: absolute;
+      background-color: #0f172a;
+      border: none;
+      border-radius: 100%;
+      padding: auto;
+      width: 30px;
+      height: 30px;
+
+      left: calc(100% + 20px);
+
+      cursor: pointer;
+
+      animation: onsetRight 5s linear forwards;
+    }
+  }
+
+  &__mid,
+  &__bottom {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &__row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 6px 12px;
+
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+
+      svg {
+        width: 30px;
+      }
+
+      &:hover {
+        background-color: #0f172a;
+        border-radius: 0.5rem;
+      }
+
+      &:active {
+        background-color: #000c45;
+      }
+    }
+  }
+
+  &__mid {
+    height: 60%;
+  }
+  &__bottom {
+    margin-top: auto;
+  }
+
+  &__mid {
+    @for $i from 1 through 100 {
+      &__row:nth-child(#{$i}) {
+        animation: onsetTop #{calc($i / 4) + 1}s linear forwards;
+      }
+    }
+  }
+
+  &__bottom {
+    @for $i from 1 through 10 {
+      &__row:nth-child(#{$i}) {
+        animation: onsetBottom #{calc($i / 4) + 5 - $i}s linear forwards;
+      }
+    }
+  }
+
+  span {
+    transition: 0.2s ease-in;
+  }
+}
+
+.closed {
+  width: 50px;
+  overflow: hidden;
+  span {
+    visibility: hidden;
+    opacity: 0;
+    position: relative;
+    transition: 0s ease-in-out;
+  }
+
+  .sidebar__mid__row:hover {
+    height: 36px;
+    width: 26px;
+
+    span {
+      position: absolute;
+      top: -2rem;
+      left: 0;
+      visibility: visible;
+      opacity: 1;
+      font-size: 1rem;
+      background-color: #000c45;
+      border-radius: 8px;
+      padding: 4px;
+    }
+  }
+}
+
+@keyframes onsetTop {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes onsetBottom {
+  0% {
+    transform: translateY(+100px);
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes onsetRight {
+  0% {
+    transform: translateX(+100px);
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
